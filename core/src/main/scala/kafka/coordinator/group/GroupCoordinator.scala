@@ -1028,6 +1028,7 @@ class GroupCoordinator(val brokerId: Int,
   }
 
   def tryCompleteJoin(group: GroupMetadata, forceComplete: () => Boolean) = {
+    println("COVERAGE CHECK|kf7142|tryCompleteJoin")
     group.inLock {
       if (group.hasAllMembersJoined)
         forceComplete()

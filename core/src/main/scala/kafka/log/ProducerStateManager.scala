@@ -463,6 +463,7 @@ object ProducerStateManager {
   private[log] def deleteSnapshotsBefore(dir: File, offset: Long): Unit = deleteSnapshotFiles(dir, _ < offset)
 
   private def deleteSnapshotFiles(dir: File, predicate: Long => Boolean = _ => true): Unit = {
+    println("COVERAGE CHECK|kf9393|deleteSnapshotFiles")
     listSnapshotFiles(dir).filter(file => predicate(offsetFromFile(file))).foreach { file =>
       Files.deleteIfExists(file.toPath)
     }

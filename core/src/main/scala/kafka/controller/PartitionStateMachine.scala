@@ -328,6 +328,8 @@ class ZkPartitionStateMachine(config: KafkaConfig,
     partitions: Seq[TopicPartition],
     partitionLeaderElectionStrategy: PartitionLeaderElectionStrategy
   ): Map[TopicPartition, Either[Throwable, LeaderAndIsr]] = {
+
+    println("COVERAGE CHECK|kf5027|electLeaderForPartitions")
     var remaining = partitions
     val finishedElections = mutable.Map.empty[TopicPartition, Either[Throwable, LeaderAndIsr]]
 

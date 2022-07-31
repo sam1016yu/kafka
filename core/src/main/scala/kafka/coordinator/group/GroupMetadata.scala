@@ -428,6 +428,7 @@ private[group] class GroupMetadata(val groupId: String, initialState: GroupState
   }
 
   def supportsProtocols(memberProtocolType: String, memberProtocols: Set[String]) = {
+    println("COVERAGE CHECK|kf7142|supportsProtocols")
     if (is(Empty))
       !memberProtocolType.isEmpty && memberProtocols.nonEmpty
     else

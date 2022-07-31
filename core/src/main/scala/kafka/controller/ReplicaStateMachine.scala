@@ -278,6 +278,7 @@ class ZkReplicaStateMachine(config: KafkaConfig,
     replicaId: Int,
     partitions: Seq[TopicPartition]
   ): Map[TopicPartition, LeaderIsrAndControllerEpoch] = {
+    println("COVERAGE CHECK|kf5027|removeReplicasFromIsr")
     var results = Map.empty[TopicPartition, LeaderIsrAndControllerEpoch]
     var remaining = partitions
     while (remaining.nonEmpty) {
