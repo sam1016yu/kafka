@@ -32,7 +32,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class MessageUtil {
- private static final Logger log = LoggerFactory.getLogger(Errors.class);
+    
+    private static final Logger log = LoggerFactory.getLogger(MessageUtil.class);
    
 
     public static final UUID ZERO_UUID = new UUID(0L, 0L);
