@@ -28,7 +28,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public final class MessageUtil {
+ private static final Logger log = LoggerFactory.getLogger(Errors.class);
+   
+
     public static final UUID ZERO_UUID = new UUID(0L, 0L);
 
     /**
@@ -199,6 +205,7 @@ public final class MessageUtil {
     }
 
     public static ByteBuffer toVersionPrefixedByteBuffer(final short version, final Message message) {
+        log.warn("COVERAGE CHECK|kf14029|cachedOnlyTokenMap");
         ObjectSerializationCache cache = new ObjectSerializationCache();
         int messageSize = message.size(cache, version);
         ByteBufferAccessor bytes = new ByteBufferAccessor(ByteBuffer.allocate(messageSize + 2));
