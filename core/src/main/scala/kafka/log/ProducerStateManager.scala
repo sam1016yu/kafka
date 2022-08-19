@@ -35,6 +35,8 @@ import scala.collection.JavaConverters._
 import scala.collection.mutable.ListBuffer
 import scala.collection.{immutable, mutable}
 
+import com.typesafe.scalalogging.Logger
+
 class CorruptSnapshotException(msg: String) extends KafkaException(msg)
 
 /**
@@ -463,6 +465,9 @@ object ProducerStateManager {
   private[log] def deleteSnapshotsBefore(dir: File, offset: Long): Unit = deleteSnapshotFiles(dir, _ < offset)
 
   private def deleteSnapshotFiles(dir: File, predicate: Long => Boolean = _ => true): Unit = {
+    val CoverageLogger = Logger("coverage.logger")
+    CoverageLogger.warn("COVERAGE CHECK|kf9393|deleteSnapshotFiles")
+    // info("COVERAGE CHECK|kf9393|deleteSnapshotFiles")
     listSnapshotFiles(dir).filter(file => predicate(offsetFromFile(file))).foreach { file =>
       Files.deleteIfExists(file.toPath)
     }

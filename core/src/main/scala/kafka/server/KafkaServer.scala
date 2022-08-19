@@ -53,6 +53,8 @@ import org.apache.kafka.server.authorizer.Authorizer
 import scala.collection.JavaConverters._
 import scala.collection.{Map, Seq, mutable}
 
+import com.typesafe.scalalogging.Logger
+
 object KafkaServer {
   // Copy the subset of properties that are relevant to Logs
   // I'm listing out individual properties here since the names are slightly different in each Config class...
@@ -191,6 +193,11 @@ class KafkaServer(val config: KafkaConfig, time: Time = Time.SYSTEM, threadNameP
    */
   def startup(): Unit = {
     try {
+
+      val CoverageLogger = Logger("coverage.logger")
+      CoverageLogger.warn("COVERAGE CHECK|test logger")
+      // println("COVERAGE CHECK")
+      
       info("starting")
 
       if (isShuttingDown.get)
@@ -368,7 +375,7 @@ class KafkaServer(val config: KafkaConfig, time: Time = Time.SYSTEM, threadNameP
       brokerTopicStats, metadataCache, logDirFailureChannel)
 
   private def initZkClient(time: Time): Unit = {
-    info(s"Connecting to zookeeper on ${config.zkConnect}")
+    info(s"SSS|Connecting to zookeeper on ${config.zkConnect}")
 
     def createZkClient(zkConnect: String, isSecure: Boolean) =
       KafkaZkClient(zkConnect, isSecure, config.zkSessionTimeoutMs, config.zkConnectionTimeoutMs,

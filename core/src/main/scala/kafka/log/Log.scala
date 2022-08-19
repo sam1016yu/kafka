@@ -49,6 +49,8 @@ import scala.collection.JavaConverters._
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 import scala.collection.{Seq, Set, mutable}
 
+import com.typesafe.scalalogging.Logger
+
 object LogAppendInfo {
   val UnknownLogAppendInfo = LogAppendInfo(None, -1, RecordBatch.NO_TIMESTAMP, -1L, RecordBatch.NO_TIMESTAMP, -1L,
     RecordConversionStats.EMPTY, NoCompressionCodec, NoCompressionCodec, -1, -1, offsetsMonotonic = false, -1L)
@@ -350,6 +352,7 @@ class Log(@volatile var dir: File,
    * @return the old high watermark, if updated by the new value
    */
   def maybeIncrementHighWatermark(newHighWatermark: LogOffsetMetadata): Option[LogOffsetMetadata] = {
+    
     if (newHighWatermark.messageOffset > logEndOffset)
       throw new IllegalArgumentException(s"High watermark $newHighWatermark update exceeds current " +
         s"log end offset $logEndOffsetMetadata")
@@ -1240,6 +1243,9 @@ class Log(@volatile var dir: File,
    * Increment the log start offset if the provided offset is larger.
    */
   def maybeIncrementLogStartOffset(newLogStartOffset: Long): Unit = {
+    val CoverageLogger = Logger("coverage.logger")
+    CoverageLogger.warn("COVERAGE CHECK|kf9393|maybeIncrementLogStartOffset")
+    // info("COVERAGE CHECK|kf9393|maybeIncrementLogStartOffset")
     if (newLogStartOffset > highWatermark)
       throw new OffsetOutOfRangeException(s"Cannot increment the log start offset to $newLogStartOffset of partition $topicPartition " +
         s"since it is larger than the high watermark $highWatermark")

@@ -36,6 +36,8 @@ import org.apache.kafka.common.record.RecordBatch.{NO_PRODUCER_EPOCH, NO_PRODUCE
 import org.apache.kafka.common.requests._
 import org.apache.kafka.common.utils.Time
 
+import com.typesafe.scalalogging.Logger
+
 import scala.collection.{Map, Seq, immutable}
 import scala.math.max
 
@@ -1028,6 +1030,8 @@ class GroupCoordinator(val brokerId: Int,
   }
 
   def tryCompleteJoin(group: GroupMetadata, forceComplete: () => Boolean) = {
+    val CoverageLogger = Logger("coverage.logger")
+    CoverageLogger.warn("COVERAGE CHECK|kf7142|tryCompleteJoin")
     group.inLock {
       if (group.hasAllMembersJoined)
         forceComplete()

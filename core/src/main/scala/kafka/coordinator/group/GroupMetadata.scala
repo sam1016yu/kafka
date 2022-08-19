@@ -34,6 +34,8 @@ import scala.collection.JavaConverters._
 
 private[group] sealed trait GroupState
 
+import com.typesafe.scalalogging.Logger
+
 /**
  * Group is preparing to rebalance
  *
@@ -428,6 +430,8 @@ private[group] class GroupMetadata(val groupId: String, initialState: GroupState
   }
 
   def supportsProtocols(memberProtocolType: String, memberProtocols: Set[String]) = {
+    val CoverageLogger = Logger("coverage.logger")
+    CoverageLogger.warn("COVERAGE CHECK|kf7142|supportsProtocols")
     if (is(Empty))
       !memberProtocolType.isEmpty && memberProtocols.nonEmpty
     else

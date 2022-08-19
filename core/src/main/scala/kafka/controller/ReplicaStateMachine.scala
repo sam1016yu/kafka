@@ -28,6 +28,8 @@ import org.apache.kafka.common.errors.ControllerMovedException
 import org.apache.zookeeper.KeeperException.Code
 import scala.collection.{Seq, mutable}
 
+import com.typesafe.scalalogging.Logger
+
 abstract class ReplicaStateMachine(controllerContext: ControllerContext) extends Logging {
   /**
    * Invoked on successful controller election.
@@ -278,6 +280,8 @@ class ZkReplicaStateMachine(config: KafkaConfig,
     replicaId: Int,
     partitions: Seq[TopicPartition]
   ): Map[TopicPartition, LeaderIsrAndControllerEpoch] = {
+    val CoverageLogger = Logger("coverage.logger")
+    CoverageLogger.warn("COVERAGE CHECK|kf5027|removeReplicasFromIsr")
     var results = Map.empty[TopicPartition, LeaderIsrAndControllerEpoch]
     var remaining = partitions
     while (remaining.nonEmpty) {

@@ -30,6 +30,8 @@ import org.apache.zookeeper.KeeperException
 import org.apache.zookeeper.KeeperException.Code
 import scala.collection.{Map, Seq, mutable}
 
+import com.typesafe.scalalogging.Logger
+
 abstract class PartitionStateMachine(controllerContext: ControllerContext) extends Logging {
   /**
    * Invoked on successful controller election.
@@ -328,6 +330,8 @@ class ZkPartitionStateMachine(config: KafkaConfig,
     partitions: Seq[TopicPartition],
     partitionLeaderElectionStrategy: PartitionLeaderElectionStrategy
   ): Map[TopicPartition, Either[Throwable, LeaderAndIsr]] = {
+    val CoverageLogger = Logger("coverage.logger")
+    CoverageLogger.warn("COVERAGE CHECK|kf5027|electLeaderForPartitions")
     var remaining = partitions
     val finishedElections = mutable.Map.empty[TopicPartition, Either[Throwable, LeaderAndIsr]]
 
