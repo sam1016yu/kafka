@@ -22,6 +22,7 @@ import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.processor.internals.metrics.StreamsMetricsImpl;
 import org.apache.kafka.streams.state.internals.NamedCache.LRUNode;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -228,6 +229,8 @@ public class ThreadCache {
     }
 
     private void maybeEvict(final String namespace) {
+        Logger CoverageLogger = LoggerFactory.getLogger("coverage.logger");
+        CoverageLogger.error("CoverageCheck|kf8736");
         int numEvicted = 0;
         while (sizeBytes() > maxCacheSizeBytes) {
             final NamedCache cache = getOrCreateCache(namespace);
